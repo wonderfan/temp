@@ -4,7 +4,6 @@ go 1.15
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.1.1
-	github.com/Pallinder/go-randomdata v1.2.0
 	github.com/briandowns/spinner v1.11.1
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/cosmos/cosmos-sdk v0.40.0-rc3
