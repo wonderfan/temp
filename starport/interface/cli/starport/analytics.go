@@ -8,16 +8,13 @@ import (
 
 	"github.com/Pallinder/go-randomdata"
 	"github.com/zhigui-projects/zeus-onestop/starport/internal/version"
-	"github.com/zhigui-projects/zeus-onestop/starport/pkg/gacli"
 )
 
 const (
-	gaid     = "UA-51029217-18" // Google Analytics' tracking id.
 	loginAny = "any"
 )
 
 var (
-	gaclient             *gacli.Client
 	starportDir          = ".starport"
 	starportAnonIdentity = "anon"
 )
@@ -35,32 +32,7 @@ type Metric struct {
 }
 
 func addMetric(m Metric) {
-	fullCommand := os.Args
-	var rootCommand string
-	if len(os.Args) > 1 { // first is starport (binary name).
-		rootCommand = os.Args[1]
-	}
 
-	var met gacli.Metric
-	switch {
-	case m.IsInstallation:
-		met.Category = "install"
-	case m.Err == nil:
-		met.Category = "success"
-	case m.Err != nil:
-		met.Category = "error"
-		met.Value = m.Err.Error()
-	}
-	if m.IsInstallation {
-		met.Action = m.Login
-	} else {
-		met.Action = rootCommand
-		met.Label = strings.Join(fullCommand, " ")
-	}
-	user, _ := prepLoginName()
-	met.User = user
-	met.Version = version.Version
-	gaclient.Send(met)
 }
 
 func prepLoginName() (name string, hadLogin bool) {
